@@ -63,6 +63,14 @@ function getSum(total, num) {
 }
 return arr.reduce(getsum, 0)
 ```
+#### 是否包含
+```
+// fromindex默认是0 开始检索的位置
+arr.includes(str, fromIndex) // true false
+arr.indexOf(str, fromindex) // number
+//  最后出现的位置
+arr.lastIndexOf(str, fromindex)
+```
 #### 二维数组
 ##### 初始化一个数组
 ```
