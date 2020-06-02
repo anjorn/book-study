@@ -187,3 +187,65 @@ function findMin(root) {
     }
 }
 ```
+
+### 平衡二叉树
+#### 概念
+任意结点的左右子树高度差绝对值都不大于1的二叉搜索树
+
+为了降低二叉搜索树的查找时间复杂度
+
+二分
+#### 命题思路
+* 对特性的考察（判定是否）
+* 对操作的考察 (构造)
+
+```
+const isBalanced = function (root) {
+    let flag = true;
+    function dfs (root) {
+        if (!root 
+        || !flag) {
+            return 0
+        }
+        const left = dfs(root.left)
+        const right = dfs(root.right)
+        if (Math.abs(left - right) > 1) {
+            flag = false
+            return 0
+        }
+        return Math.max(left, right) + 1
+    }
+    dfs(root)
+    return flag
+}
+```
+中序遍历序列是有序的
+
+1. 中序遍历求出有序数组
+2. 逐个将二分出来的数组子序列提起来变成二叉搜索树
+```
+const balanceBST = function (root) {
+    // 中序数组
+    const nums = []
+    function inorder (root) {
+        if (!root) {
+            return
+        }
+        inorder(root.left)
+        nums.push(root.val)
+        inorder(root.right)
+    }
+    inorder(root)
+    function buildAVL (low, high) {
+        if (low > high) {
+            return null
+        }
+        const mid = Math.floor(low + (high - low) / 2)
+        const cur = new TreeNode(nums[mid])
+        cur.left = buildAVL(low, mid-1)
+        cur.right = buildAVL(mid+1, high)
+        return cur
+    }
+    return buildAVL(0, nums.length-1)
+}
+```

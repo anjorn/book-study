@@ -75,7 +75,7 @@ var partition = function(s) {
     
 };
 
-const inorderTraversal = function (rrot) {
+const inorderTraversal = function (root) {
     const res = []
     const stack = []
     let cur = root
@@ -90,3 +90,33 @@ const inorderTraversal = function (rrot) {
     }
     return res
 }
+const insert = function (root, key) {
+    if (!root) {
+        root = new TreeNode(key)
+        return
+    }
+    if (root.val == key) {
+        return
+    } else if (root.val < key) {
+        insert(root.right, key)
+    } else {
+        insert(root.left, key)
+    }
+}
+
+function insertion (arr) {
+    let len = arr.length
+    let temp
+    for (let i = 1; i < len; i++) {
+        let j = i
+        temp = arr[i]
+        while (j > 0 && arr[j-1] > temp) {
+            arr[j] = arr[j-1]
+            j--
+        }
+        arr[j] = temp
+    }
+    return arr
+}
+
+function 
